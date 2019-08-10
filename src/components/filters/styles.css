@@ -1,0 +1,29 @@
+.filters {
+  padding: 10px;
+  border: solid black;
+  border-width: 2px 0;
+  margin: 10px 0;
+}
+
+.InputFromTo input {
+  background-color: hsl(0, 0%, 100%);
+  border-color: hsl(0, 0%, 80%);
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  cursor: default;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 5px 10px;
+  height: 25px;
+}
+
+.filters__holder {
+  display: flex;
+}
+
+.filters__select {
+  min-width: 200px;
+  margin-right: 20px;
+}

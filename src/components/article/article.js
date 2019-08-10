@@ -4,7 +4,7 @@ import styles from "./styles.css";
 import CommentList from "../comment-list";
 import { deleteArticle } from "../../ac";
 
-function Article({ article, isOpen, onBtnClick, deleteArticle }) {
+function Article({ article, isOpen, onBtnClick }) {
   useEffect(() => {
     //subscribe
     console.log("subscribe for ", article.id);

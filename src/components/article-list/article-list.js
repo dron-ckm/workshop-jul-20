@@ -2,12 +2,28 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import Article from "../article";
 import accordion from "../../decorators/accordion";
+import PropTypes from "prop-types";
 
-@connect(state => ({ articles: state.articles }))
+@connect(state => ({ articles: state.articles, filters: state.filters }))
 @accordion
 class ArticleList extends React.Component {
+  static propTypes = {
+    isOpen: PropTypes.func.isRequired,
+    setOpenId: PropTypes.func.isRequired,
+    articles: PropTypes.array,
+    filters: PropTypes.shape({
+      startDate: PropTypes.date,
+      endDate: PropTypes.date
+    })
+  };
+
   render() {
-    const { articles, defaultOpenId, isOpen, setOpenId } = this.props;
+    let { articles, isOpen, setOpenId, filters } = this.props;
+
+    // Articles should be filtered in reducer ?
+    articles = articles.filter(article => {
+      return isDateInRange(article.date, filters.startDate, filters.endDate);
+    });
 
     return (
       <div ref={this.setContainerRef}>
@@ -25,6 +41,14 @@ class ArticleList extends React.Component {
 
   setContainerRef = containerRef => console.log("container: ", containerRef);
 }
+
+const isDateInRange = (date, from, to) => {
+  if (!from || !to) {
+    return true;
+  }
+  const dateTimeStamp = +new Date(date);
+  return dateTimeStamp >= +new Date(from) && dateTimeStamp <= +new Date(to);
+};
 
 /*
 class ArticleList extends Component {
